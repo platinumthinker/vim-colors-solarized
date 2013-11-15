@@ -7,7 +7,7 @@ if exists("g:loaded_togglebg")
     finish
 endif
 let g:loaded_togglebg = 1
-
+let g:solarized_background = &background
 " noremap is a bit misleading here if you are unused to vim mapping.
 " in fact, there is remapping, but only of script locally defined remaps, in 
 " this case <SID>TogBG. The <script> argument modifies the noremap scope in 
@@ -26,10 +26,6 @@ tmenu ToolBar.togglebg Toggle light and dark background modes
 noremap <SID>TogBG  :call <SID>TogBG()<CR>
 
 function! s:TogBG()
-    if !exists("g:solarized_background")
-        let g:solarized_background = &background
-    endif
-
     if g:solarized_background == "dark"
         let g:solarized_background = "light"
     else
@@ -40,9 +36,13 @@ function! s:TogBG()
         let l:colors_name = g:colors_name
         let &background = g:solarized_background
         let g:colors_name = l:colors_name
-        exe "colorscheme " . g:colors_name
+        exe "colorscheme " . l:colors_name
     endif
 endfunction
+
+if !has('gui_running')
+    :call s:TogBG()
+endif
 
 if !exists(":ToggleBG")
     command ToggleBG :call s:TogBG()
