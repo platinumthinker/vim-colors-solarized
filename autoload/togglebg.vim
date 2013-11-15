@@ -26,8 +26,20 @@ tmenu ToolBar.togglebg Toggle light and dark background modes
 noremap <SID>TogBG  :call <SID>TogBG()<CR>
 
 function! s:TogBG()
-    let &background = ( &background == "dark"? "light" : "dark" )
+    if !exists("g:solarized_background")
+        let g:solarized_background = &background
+    endif
+
+    if g:solarized_background == "dark"
+        let g:solarized_background = "light"
+    else
+        let g:solarized_background = "dark"
+    endif
+
     if exists("g:colors_name")
+        let l:colors_name = g:colors_name
+        let &background = g:solarized_background
+        let g:colors_name = l:colors_name
         exe "colorscheme " . g:colors_name
     endif
 endfunction
@@ -35,10 +47,6 @@ endfunction
 if !exists(":ToggleBG")
     command ToggleBG :call s:TogBG()
 endif
-
-function! ToggleBackground()
-    echo "Please update your ToggleBackground mapping. ':help togglebg' for information."
-endfunction
 
 function! togglebg#map(mapActivation)
     try
