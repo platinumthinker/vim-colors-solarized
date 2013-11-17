@@ -40,9 +40,9 @@ function! s:TogBG()
     endif
 endfunction
 
-if !has('gui_running')
-    :call s:TogBG()
-endif
+"if !has('gui_running')
+    ":call s:TogBG()
+"endif
 
 if !exists(":ToggleBG")
     command ToggleBG :call s:TogBG()

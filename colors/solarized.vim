@@ -300,8 +300,8 @@ elseif g:solarized_termcolors != 256 && &t_Co >= 16
     let s:green       = "2"
 elseif g:solarized_termcolors == 256
     let s:vmode       = "cterm"
-    let s:base03      = "234"
-    let s:base02      = "235"
+    let s:base03      = "17"
+    let s:base02      = "18"
     let s:base01      = "239"
     let s:base00      = "240"
     let s:base0       = "244"
@@ -319,44 +319,26 @@ elseif g:solarized_termcolors == 256
 else
     let s:vmode       = "cterm"
     let s:bright      = "* term=bold cterm=bold"
-"   let s:base03      = "0".s:bright
-"   let s:base02      = "0"
-"   let s:base01      = "2".s:bright
-"   let s:base00      = "3".s:bright
-"   let s:base0       = "4".s:bright
-"   let s:base1       = "6".s:bright
-"   let s:base2       = "7"
-"   let s:base3       = "7".s:bright
-"   let s:yellow      = "3"
-"   let s:orange      = "1".s:bright
-"   let s:red         = "1"
-"   let s:magenta     = "5"
-"   let s:violet      = "5".s:bright
-"   let s:blue        = "4"
-"   let s:cyan        = "6"
-"   let s:green       = "2"
-    let s:base03      = "DarkGray"      " 0*
-    let s:base02      = "Black"         " 0
-    let s:base01      = "LightGreen"    " 2*
-    let s:base00      = "LightYellow"   " 3*
-    let s:base0       = "LightBlue"     " 4*
-    let s:base1       = "LightCyan"     " 6*
-    let s:base2       = "LightGray"     " 7
-    let s:base3       = "White"         " 7*
-    let s:yellow      = "DarkYellow"    " 3
-    let s:orange      = "LightRed"      " 1*
-    let s:red         = "DarkRed"       " 1
-    let s:magenta     = "DarkMagenta"   " 5
-    let s:violet      = "LightMagenta"  " 5*
-    let s:blue        = "DarkBlue"      " 4
-    let s:cyan        = "DarkCyan"      " 6
-    let s:green       = "DarkGreen"     " 2
-
+  let s:base03      = "0".s:bright
+  let s:base02      = "0"
+  let s:base01      = "2".s:bright
+  let s:base00      = "3".s:bright
+  let s:base0       = "4".s:bright
+  let s:base1       = "6".s:bright
+  let s:base2       = "7"
+  let s:base3       = "7".s:bright
+  let s:yellow      = "3"
+  let s:orange      = "1".s:bright
+  let s:red         = "1"
+  let s:magenta     = "5"
+  let s:violet      = "5".s:bright
+  let s:blue        = "4"
+  let s:cyan        = "6"
+  let s:green       = "2"
 endif
 "}}}
 " Formatting options and null values for passthrough effect "{{{
 " ---------------------------------------------------------------------
-    let s:none            = "NONE"
     let s:none            = "NONE"
     let s:t_none          = "NONE"
     let s:n               = "NONE"
@@ -377,18 +359,10 @@ endif
 " Alternate light scheme "{{{
 " ---------------------------------------------------------------------
 if &background == "light"
-    let s:temp03      = s:base03
-    let s:temp02      = s:base02
-    let s:temp01      = s:base01
-    let s:temp00      = s:base00
-    let s:base03      = s:base3
-    let s:base02      = s:base2
-    let s:base01      = s:base1
-    let s:base00      = s:base0
-    let s:base0       = s:temp00
-    let s:base1       = s:temp01
-    let s:base2       = s:temp02
-    let s:base3       = s:temp03
+    let [s:base00, s:base0] = [s:base0, s:base00]
+    let [s:base01, s:base1] = [s:base1, s:base01]
+    let [s:base02, s:base2] = [s:base2, s:base02]
+    let [s:base03, s:base3] = [s:base3, s:base03]
     if (s:back != "NONE")
         let s:back    = s:base03
     endif
@@ -1063,7 +1037,7 @@ function! SolarizedMenu()
 
         amenu &Solarized.&Diff\ Mode.&Low\ Diff\ Mode    :let g:solarized_diffmode="low"     \| colorscheme solarized<CR>
         amenu &Solarized.&Diff\ Mode.&Normal\ Diff\ Mode :let g:solarized_diffmode="normal"  \| colorscheme solarized<CR>
-        amenu &Solarized.&Diff\ Mode.&High\ Diff\ Mode   :let g:solarized_diffmode="high"    \| colorscheme solarized<CR>
+            amenu &Solarized.&Diff\ Mode.&High\ Diff\ Mode   :let g:solarized_diffmode="high"    \| colorscheme solarized<CR>
 
         if g:solarized_hitrail==0 | let l:hitrailswitch="On" | else | let l:hitrailswitch="Off" | endif
         exe "amenu &Solarized.&Experimental.&Turn\\ Highlight\\ Trailing\\ Spaces\\ ".l:hitrailswitch." :let g:solarized_hitrail=(abs(g:solarized_hitrail-1)) \\| colorscheme solarized<CR>"
